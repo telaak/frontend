@@ -1,23 +1,48 @@
 import React, { Component } from 'react';
-import LandingPageBackground from './images/landingpage/landingpage.jpg'
+import Lottie from 'react-lottie';
+import animationData from './animations/Hud.json'
+import { withRouter } from "react-router-dom";
+
 class LandingPage extends Component {
 
+  constructor(props) {
+    super(props);
+    this.animationClick = this.animationClick.bind(this)
+  }
+
+  //Uses react-router v4 withRouter and history.push to navigate to the wanted location
+  animationClick() {
+    this.props.history.push("/Store")
+  }
+  componentWillUnmount() {
+    console.log('animation component unmounted')
+  }
+
   render() {
-   return <div className="container landingPagePicWidth">
-   <img src={LandingPageBackground} className="img-fluid mt-5 pt-5" alt="langingpage"></img>
-    <div className="row justify-content-center border border-primary">
-      <div className="col">
-        1 of 3
-      </div>
-      <div className="col-6">
-        2 of 3 (wider)
-      </div>
-      <div className="col">
-        3 of 3
-      </div>
-    </div>
-   </div>
+
+    const animationWrapper = {
+      width: '700px'
+    }
+
+    const defaultOptions = {
+      loop: true,
+      autoplay: true, 
+      animationData: animationData,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
+    
+
+   return <div className="d-flex flex-column justify-content-center mt-5 pt-5">
+              <div className="p-2 d-flex row justify-content-center">
+                <div style={animationWrapper} className="animationPic" onClick={this.animationClick}>
+                  <Lottie options={defaultOptions}/>
+                </div>
+              </div>
+              <button>stop</button>
+          </div>
   }
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);

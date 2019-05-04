@@ -27,6 +27,10 @@ class Store extends Component {
     this.setState({shoppingcart: this.state.shoppingcart})
   }
 
+  componentWillUnmount() {
+    console.log('component unmounted')
+  }
+  
   render() {
    return <div>
             <div className="container landingPagePicWidth">
